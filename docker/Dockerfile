@@ -22,7 +22,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN pip install --upgrade pip
 
 # Install pytorch
-RUN pip install  \
+RUN pip install \
     torch==${PYTORCH_VERSION} \
     torchvision==${TORCHVISION_VERSION} \
     torchaudio==${TORCHAUDIO_VERSION} \
@@ -39,40 +39,40 @@ RUN apt-get install -y \
     tmux
 
 # Install extra packages (pip)
-RUN pip install                 \
-    tqdm==4.61.0                \
-    boto3==1.17.83              \
-    termcolor==1.1.0            \
-    pyyaml==5.4.1               \
-    wandb==0.10.31              \
-    opencv-python==4.5.2.52     \
-    flow_vis==0.1               \
-    matplotlib==3.3.4           \
-    fire==0.4.0                 \
-    pyquaternion==0.9.9         \
-    pandas==1.1.5               \
-    xarray==0.16.2              \
-    diskcache==5.2.1            \
-    tenacity==7.0.0             \
-    awscli==1.19.101            \
-    ref==0.0.2.2                \
+RUN pip install \
+    tqdm==4.61.0 \
+    boto3==1.17.83 \
+    termcolor==1.1.0 \
+    pyyaml==5.4.1 \
+    wandb==0.10.31 \
+    opencv-python==4.5.2.52 \
+    flow_vis==0.1 \
+    matplotlib==3.3.4 \
+    fire==0.4.0 \
+    pyquaternion==0.9.9 \
+    pandas==1.1.5 \
+    xarray==0.16.2 \
+    diskcache==5.2.1 \
+    tenacity==7.0.0 \
+    awscli==1.19.101 \
+    ref==0.0.2.2 \
     positional-encodings==4.0.0 \
-    einops==0.3.2               \
-    wget==3.2                   \
-    kornia==0.6.8               \
-    lpips==0.1.4                \
-    scikit-image==0.19.3        \
+    einops==0.3.2 \
+    wget==3.2 \
+    kornia==0.6.8 \
+    lpips==0.1.4 \
+    scikit-image==0.19.3 \
     timm==0.6.11
 
 # Install CamViz dependencies
-RUN pip install                 \
-    pygame==2.0.1               \
-    PyOpenGL==3.1.5             \
+RUN pip install \
+    pygame==2.0.1 \
+    PyOpenGL==3.1.5 \
     PyOpenGL-accelerate==3.1.5
-RUN apt-get install -y          \
-    mesa-utils                  \
-    freeglut3-dev               \
-    libsdl2-2.0-0               \
+RUN apt-get install -y \
+    mesa-utils \
+    freeglut3-dev \
+    libsdl2-2.0-0 \
     python-pygame
 
 # Install CLIP
@@ -113,3 +113,7 @@ COPY . /workspace/${PROJECT}
 ENV PYTHONPATH="/workspace/${PROJECT}:$PYTHONPATH"
 ENV PYTHONPATH="/workspace/${PROJECT}/externals/camviz:$PYTHONPATH"
 ENV PYTHONPATH="/workspace/${PROJECT}/externals/efm_datasets:$PYTHONPATH"
+
+ENV TINI_VERSION v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
